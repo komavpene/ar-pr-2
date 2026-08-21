@@ -23,7 +23,7 @@ const ZONES_LINE_LAYER = "zones-line";
 const SELECTED_FILL_LAYER = "selected-zone-fill";
 const SELECTED_LINE_LAYER ="selected-zone-line";
 
-const osmStyle = {
+const osmStyle : StyleSpecification = {
     version: 8,
     sources:{
         osm:{
@@ -99,7 +99,8 @@ function getDrawStyles()
                 }
             }
         }
-        if (layer.type === "line") return layer;
+        if (layer.type !== "line") return layer;
+
         return {
             ...layer,
             paint:{
@@ -179,6 +180,7 @@ drawRef.current = draw;
             const features = map.queryRenderedFeatures(
                 event.point,{layers: [ZONE_FILL_LAYER]}
             );
+            if (features.length === 0) onSelectZoneRef.current(null);
         }
 
         const showPointer = () => {map.getCanvas().style.cursor = "pointer";};
@@ -267,5 +269,5 @@ drawRef.current = draw;
 
         }),[drawRevision,isCreating]
 
-        return <div ref={containerRef} className='zones-map'></div>
+        return <div ref={containerRef} className='!absolute insert-0'></div>
     }
