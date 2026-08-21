@@ -199,9 +199,7 @@ drawRef.current = draw;
                     type:"geojson",data: zonesCollection(zonesRef.current)
                 }
             )
-        })
-
-        map.addLayer({
+            map.addLayer({
             id: ZONE_FILL_LAYER,
             type: "fill",
             source: ZONE_SOURCE,
@@ -230,6 +228,9 @@ drawRef.current = draw;
             paint: {"line-color": "#b45309","line-width": 3}
         });
 
+        })
+
+        
         fitZones(map,zonesRef.current)
 
             return () =>
@@ -269,5 +270,5 @@ drawRef.current = draw;
 
         }),[drawRevision,isCreating]
 
-        return <div ref={containerRef} className='!absolute insert-0'></div>
+        return <div ref={containerRef} className='!absolute insert-0 w-full h-full'></div>
     }
