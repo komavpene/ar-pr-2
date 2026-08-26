@@ -167,7 +167,7 @@ const deleteZone = () =>
                 <button
                     type ="button"
                     onClick={deleteZone}
-                     className="h-10 flex-1 rounded-md bg-emerald-700 px-4 text-sm font-medium text-white">
+                     className="flex items-center gap-2 ///h-10 flex-1 rounded-md bg-emerald-700 px-4 text-sm font-medium text-white">
                         <TrashIcon size={16}/>
                         удалить зону
                 </button>
