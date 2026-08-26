@@ -30,7 +30,7 @@ export function MapPage()
         const nextZone = [zone, ...zones];
         setZones(nextZone);
         setIsCreating(false);
-        setSelectedZoneId(null);
+        setSelectedZoneId(zone.id);
     };
 
     const startCreating = () =>{
@@ -68,7 +68,7 @@ const deleteZone = () =>
     />
 
 {panelOpen && (
-    <aside className={"absolute inset-x-0 bottom-0 z-30 flex h-[48dvh] flex-col border-t border-neutral-200 bg-white shadow-xl"}>
+    <aside className={"absolute inset-y-0 right-0 w-[360] h-full bottom-0 z-30 flex flex-col border-t border-neutral-200 bg-white shadow-xl"}>
         <div className = {"flex items-center justify-between border-b border-neutral-200 px-5 py-4"}>
             <div> 
             <p className="text-xs font-medium uppercase text-neutral-500">
@@ -76,7 +76,7 @@ const deleteZone = () =>
                     isCreating ? "Новая зона" : "Полигонная зона"
                 }
                 <h1 className="mt-1 max-w-[270px] trucate text-lg font-semibold">
-                    ${isCreating ? "Добавление": selectedZone?.name}
+                    {isCreating ? "Добавление": selectedZone?.name}
                 </h1>
             </p>
             </div>
@@ -85,10 +85,10 @@ const deleteZone = () =>
             className={"grid size-9 place-items-center rounded-md text-neutral-500 hover:bg-neutral-100"}>
                 <XIcon size={20}/>
             </button>
-
+            </div>
             {isCreating ? (
                 <form className="flex flex-col flex-1 min-h-0" onSubmit={SaveZone} noValidate>
-                    <div className="min-h-0 flex-1 overflow-y-auto p-5">
+                    <div className="flex flrx-col min-h-0 flex-1 overflow-y-auto p-5">
                         <label htmlFor="zone-name" className="mb-2 block text-sm font-medium">Название</label>
                         <input
                         type="text"
@@ -102,7 +102,7 @@ const deleteZone = () =>
                         autoFocus
                         className="h-11 w-full rounded-md border border-neutral-300 px-3 text-sm outline-none"
                         />
-                        <div className="mt-6 border-t border-neutral-200 pt-500">
+                        <div className="flex flex-col flex-1 mt-6 border-t border-neutral-200 pt-500">
                             <div className="flex items-center justify-between gap-4">
                                 <p className="text-sm font-medium">Полигон</p>
                                 <p className="mt-1 text-sm text-neutral-500"> {draftCoordinates.length} вершин</p>
@@ -120,16 +120,16 @@ const deleteZone = () =>
                             </div>
                                 <p className ="mt-4 text-ms leading-5 text-neutral-500">Расставьте точки на карте и замкните контур кликом по первой точке</p>
                         </div>
-                                <div className="flex gap-3 border-t border-neutral-200">
+                                <div className="flex-1 flex items-end gap-3 ">
                                     <button
                                         type="button"
                                         onClick={closePanel}
                                         className="h-10 flex-1 rounded-md border border-neutral-300 px-4 text-sm font-medium"
-                                        >Добавить</button>
+                                        >Отменить</button>
                                     <button
                                     type="submit"
                                     className="h-10 flex-1 rounded-md bg-emerald-700 px-4 text-sm font-medium text-white"
-                                    >Отменить</button>
+                                    >Добавить</button>
                                 </div>
                         </div>
                 </form>
@@ -175,13 +175,15 @@ const deleteZone = () =>
 
         </div>
         ): (null)}
-        </div>
+
+
+        
     </aside>
 )}
 
     <button 
     className={[
-        "absolute z-20 left-0 flrx h-12 item-center gap-2 rounded-md bg-emerald-700 px-4",
+        "absolute z-20 right-0 flex w-fit h-12 item-center gap-2 rounded-md bg-emerald-700 px-4",
     ` text-dm font-drmibold text-white ${
         panelOpen 
         ? "bottom-[calc(48fvh+2rem)] tight-4"
